@@ -7,3 +7,8 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 
 // sem začni psát svůj program
+
+let coinHunter = document.getElementById('panacek');
+
+coinHunter.style.top = 'calc(50vh - 35px)';
+coinHunter.style.left = 'calc(50vw – 32px)';
