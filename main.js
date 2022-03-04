@@ -8,7 +8,26 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 // sem začni psát svůj program
 
-let coinHunter = document.getElementById('panacek');
+let boy = document.getElementById('panacek');
 
-coinHunter.style.top = 'calc(50vh - 35px)';
-coinHunter.style.left = 'calc(50vw – 32px)';
+let x = window.innerWidth * 0.5 - 32;
+let y = window.innerHeight * 0.5 - 35;
+
+boy.style.left = x + 'px';
+boy.style.top = y + 'px';
+
+function move(event) {
+	if (event.key === 'ArrowDown') {
+		y = y + 50;
+		boy.style.top = y + 'px';
+	} else if (event.key === 'ArrowUp') {
+		y = y - 50;
+		boy.style.top = y + 'px';
+	} else if (event.key === 'ArrowRight') {
+		x = x + 50;
+		boy.style.left = x + 'px';
+	} else if (event.key === 'ArrowLeft') {
+		x = x - 50;
+		boy.style.left = x + 'px';
+	}
+}
