@@ -8,28 +8,24 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 // sem začni psát svůj program
 
+let windowWidth = window.innerWidth;
+let windowHeight = window.innerHeight;
+
 let boy = document.getElementById('panacek');
 
 let x = window.innerWidth * 0.5 - 32;
 let y = window.innerHeight * 0.5 - 35;
 
-let windowWidth = window.innerWidth;
-let windowHeight = window.innerHeight;
-
 let boyHeight = 64;
 let boyWidth = 70;
-
-console.log(windowHeight);
-console.log(windowHeight - boyHeight);
 
 boy.style.left = x + 'px';
 boy.style.top = y + 'px';
 
 function move(event) {
-	console.log(boy.style.left);
 	if (event.key === 'ArrowDown') {
 		if (y > windowHeight - boyHeight - 10) {
-			boy.style.top = windowHeight - boyHeight - 10 + 'px';
+			boy.style.top = y + 'px';
 		} else {
 			y = y + 10;
 			boy.style.top = y + 'px';
@@ -43,7 +39,7 @@ function move(event) {
 		}
 	} else if (event.key === 'ArrowRight') {
 		if (x > windowWidth - boyWidth) {
-			boy.style.left = windowWidth - boyWidth + 'px';
+			boy.style.left = x + 'px';
 		} else {
 			x = x + 10;
 			boy.style.left = x + 'px';
@@ -57,3 +53,14 @@ function move(event) {
 		}
 	}
 }
+
+let coin = document.getElementById('mince');
+
+let coinWidth = 36;
+let coinHeight = 36;
+
+let coinX = Math.random() * (window.innerWidth - coinWidth);
+let coinY = Math.random() * (window.innerHeight - coinHeight);
+
+coin.style.left = coinX + 'px';
+coin.style.top = coinY + 'px';
