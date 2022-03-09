@@ -8,59 +8,86 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 // sem začni psát svůj program
 
+// globální proměnné
+
+let boy = document.getElementById('panacek');
+let boyX;
+let boyY;
+let boyHeight;
+let boyWidth;
+
+let coin = document.getElementById('mince');
+let coinX;
+let coinY;
+let coinWidth;
+let coinHeight;
+
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 
-let boy = document.getElementById('panacek');
+// při načtení stránky
 
-let x = window.innerWidth * 0.5 - 32;
-let y = window.innerHeight * 0.5 - 35;
-
-let boyHeight = 64;
-let boyWidth = 70;
-
-boy.style.left = x + 'px';
-boy.style.top = y + 'px';
-
-function move(event) {
-	if (event.key === 'ArrowDown') {
-		if (y > windowHeight - boyHeight - 10) {
-			boy.style.top = y + 'px';
-		} else {
-			y = y + 10;
-			boy.style.top = y + 'px';
-		}
-	} else if (event.key === 'ArrowUp') {
-		if (y < 0) {
-			boy.style.top = 0 + 'px';
-		} else {
-			y = y - 10;
-			boy.style.top = y + 'px';
-		}
-	} else if (event.key === 'ArrowRight') {
-		if (x > windowWidth - boyWidth) {
-			boy.style.left = x + 'px';
-		} else {
-			x = x + 10;
-			boy.style.left = x + 'px';
-		}
-	} else if (event.key === 'ArrowLeft') {
-		if (x < 0) {
-			boy.style.left = 0 + 'px';
-		} else {
-			x = x - 10;
-			boy.style.left = x + 'px';
-		}
-	}
+function onLoad() {
+	boyHeight = 64;
+	boyWidth = 70;
+	boyX = window.innerWidth * 0.5 - boyHeight / 2;
+	boyY = window.innerHeight * 0.5 - boyWidth / 2;
+	boyPosition();
+	coinWidth = 36;
+	coinHeight = 36;
+	newCoin();
 }
 
-let coin = document.getElementById('mince');
+function boyPosition() {
+	boy.style.left = boyX + 'px';
+	boy.style.top = boyY + 'px';
+}
 
-let coinWidth = 36;
-let coinHeight = 36;
+function newCoin() {
+	coinX = Math.random() * (window.innerWidth - coinWidth);
+	coinY = Math.random() * (window.innerHeight - coinHeight);
+	coin.style.left = coinX + 'px';
+	coin.style.top = coinY + 'px';
+}
 
-let coinX = Math.random() * (window.innerWidth - coinWidth);
-let coinY = Math.random() * (window.innerHeight - coinHeight);
+function move(event) {
+	console.log(boyX + ' ' + coinX);
+	if (event.key === 'ArrowDown') {
+		if (boyY > window.innerHeight - boyHeight - 10) {
+			boy.style.top = boyY + 'px';
+		} else {
+			boyY = boyY + 10;
+			boy.style.top = boyY + 'px';
+		}
+	} else if (event.key === 'ArrowUp') {
+		if (boyY < 0) {
+			boy.style.top = 0 + 'px';
+		} else {
+			boyY = boyY - 10;
+			boy.style.top = boyY + 'px';
+		}
+	} else if (event.key === 'ArrowRight') {
+		if (boyX > window.innerWidth - boyWidth) {
+			boy.style.left = boyX + 'px';
+		} else {
+			boyX = boyX + 10;
+			boy.style.left = boyX + 'px';
+		}
+	} else if (event.key === 'ArrowLeft') {
+		if (boyX < 0) {
+			boy.style.left = 0 + 'px';
+		} else {
+			boyX = boyX - 10;
+			boy.style.left = boyX + 'px';
+		}
+	}
+	testCollision();
+}
 
-coin.style.left = coinX + 'px';
-coin.style.top = coinY + 'px';
+function testCollision() {
+	console.log('test kolize');
+	if (!(boyX + boyWidth < coinX || coinX + coinWidth < boyX || boyY + boyHeight < coinY || coinY + coinHeight < boyY)) {
+		newCoin();
+		console.log('kolize')
+	}
+}
