@@ -93,6 +93,7 @@ function testCollision() {
 		newCoin();
 		coinSound();
 		scorePlus();
+		victory();
 	}
 }
 
@@ -105,11 +106,19 @@ function playMusic() {
 function coinSound() {
 	let coinSound = document.getElementById('zvukmince');
 	coinSound.play();
-	coinSound.volume = 0.2;
+	coinSound.volume = 0.4;
 }
 
 function scorePlus() {
 	score++;
-	console.log('score = ' + score);
 	document.getElementById('score').innerHTML = score;
+}
+
+function victory() {
+	let fanfare = document.getElementById('zvukfanfara');
+	if (score === 5) {
+		fanfare.play();
+		fanfare.volume = 0.4;
+		alert('Gratuluji. Vyhrál jsi!');
+	}
 }
