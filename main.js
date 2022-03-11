@@ -22,9 +22,6 @@ let coinY;
 let coinWidth;
 let coinHeight;
 
-let windowWidth = window.innerWidth;
-let windowHeight = window.innerHeight;
-
 // při načtení stránky
 
 function onLoad() {
@@ -51,8 +48,9 @@ function newCoin() {
 }
 
 function move(event) {
-	console.log(boyX + ' ' + coinX);
+	playMusic();
 	if (event.key === 'ArrowDown') {
+		boy.src = 'obrazky/panacek.png';
 		if (boyY > window.innerHeight - boyHeight - 10) {
 			boy.style.top = boyY + 'px';
 		} else {
@@ -60,6 +58,7 @@ function move(event) {
 			boy.style.top = boyY + 'px';
 		}
 	} else if (event.key === 'ArrowUp') {
+		boy.src = 'obrazky/panacek-nahoru.png';
 		if (boyY < 0) {
 			boy.style.top = 0 + 'px';
 		} else {
@@ -67,6 +66,7 @@ function move(event) {
 			boy.style.top = boyY + 'px';
 		}
 	} else if (event.key === 'ArrowRight') {
+		boy.src = 'obrazky/panacek-vpravo.png';
 		if (boyX > window.innerWidth - boyWidth) {
 			boy.style.left = boyX + 'px';
 		} else {
@@ -74,6 +74,7 @@ function move(event) {
 			boy.style.left = boyX + 'px';
 		}
 	} else if (event.key === 'ArrowLeft') {
+		boy.src = 'obrazky/panacek-vlevo.png';
 		if (boyX < 0) {
 			boy.style.left = 0 + 'px';
 		} else {
@@ -85,9 +86,20 @@ function move(event) {
 }
 
 function testCollision() {
-	console.log('test kolize');
 	if (!(boyX + boyWidth < coinX || coinX + coinWidth < boyX || boyY + boyHeight < coinY || coinY + coinHeight < boyY)) {
 		newCoin();
-		console.log('kolize')
+		coinSound();
 	}
+}
+
+function playMusic() {
+	let music = document.getElementById('hudba');
+	music.play();
+	music.volume = 0.2;
+}
+
+function coinSound() {
+	let coinSound = document.getElementById('zvukmince');
+	coinSound.play();
+	coinSound.volume = 0.2;
 }
