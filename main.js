@@ -22,6 +22,8 @@ let coinY;
 let coinWidth;
 let coinHeight;
 
+let score = document.getElementById('score');
+
 // při načtení stránky
 
 function onLoad() {
@@ -33,6 +35,7 @@ function onLoad() {
 	coinWidth = 36;
 	coinHeight = 36;
 	newCoin();
+	score = 0;
 }
 
 function boyPosition() {
@@ -89,6 +92,7 @@ function testCollision() {
 	if (!(boyX + boyWidth < coinX || coinX + coinWidth < boyX || boyY + boyHeight < coinY || coinY + coinHeight < boyY)) {
 		newCoin();
 		coinSound();
+		scorePlus();
 	}
 }
 
@@ -102,4 +106,10 @@ function coinSound() {
 	let coinSound = document.getElementById('zvukmince');
 	coinSound.play();
 	coinSound.volume = 0.2;
+}
+
+function scorePlus() {
+	score++;
+	console.log('score = ' + score);
+	document.getElementById('score').innerHTML = score;
 }
